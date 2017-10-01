@@ -1,0 +1,56 @@
+h1{
+	color: red;
+}
+h2{
+	color: green;
+}
+p{
+	font-size: 20px;
+
+}
+table{
+	width: 400px;
+	height: 500px;
+
+}
+th{
+	background-color: black;
+	color: white;
+}
+tr{
+	text-align: center;
+}
+.classes tr:hover{
+	background-color: green;
+	cursor: pointer;
+}
+
+.classes{
+	padding-left: 50px;
+	padding-top: 30px;
+	border: 3px dashed blue;
+	width: 470px;
+	height: 700px;
+}
+.students{
+	float: left;
+	padding-left: 50px;
+	padding-top: 30px;
+	border: 3px dashed blue;
+	margin-top: -735px;
+	margin-left: 550px;
+
+	width: 870px;
+	height: 700px;
+}
+.students table{
+	width: 800px;
+	height: 600px;
+
+}
+.students table th{
+	background-color: gray;
+	color: white;
+	font-size: 22px;
+
+}

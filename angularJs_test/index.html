@@ -1,0 +1,138 @@
+<html>  
+	<head>
+	  <title>Student Mangagement</title>
+	  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	  <script src = "jquery.js"></script>
+	  <link rel="stylesheet" type="text/css" href="style.css">
+
+   </head>  
+<body>
+   <h1>Student Mangagement</h1>
+	  
+	  <div ng-app = "classApp"> 
+		 
+	  <div class="classes" ng-controller = "classController">
+
+		 <p>Enter your ClassName: <input type = "text" ng-model = "name"></p>
+		 <p>Inputed class name <span ng-bind = "name"></span>!</p>
+		 <p>List of Classes with our school:</p>
+		 <table border = "1">
+			<tr>
+			   <th>No.</th>
+			   <th>ClassName</th>
+			   <th>Counts</th>
+			</tr>
+			<tr ng-repeat = "clas in classes.class" ng-click="showClass($index)">
+			   <td>{{ $index+1 }}</td>
+			   <td>{{ clas.className }}</td>
+			   <td>{{ clas.count }}</td>
+			</tr>
+		 </table>
+	  </div>
+	  <div class="students" ng-controller = "studentController">
+		 <h2>Class's Students</h2>
+		 <table border = '1'>
+			<tr>
+			   <th>Name</th>
+			   <th>Gender</th>
+			   <th>age</th>
+			</tr>
+			<tr ng-repeat = 'student in classes.class1'>
+			   <td>{{ student.name}}</td>
+			   <td>{{ student.sex}}</td>
+			   <td>{{ student.age}}</td>
+			</tr>
+		 </table>                            
+	  </div>	  
+   </div>
+</body>
+<script type="text/javascript">
+var classApp = angular.module("classApp", []);
+// classApp.controller('classController');
+// classApp.controller('studentController');
+classApp.factory('mySharedService', function($rootScope) {
+    var sharedService = {};    
+    sharedService.message = '';
+    sharedService.prepForBroadcast = function(msg) {
+        this.message = msg;
+        this.broadcastItem();
+    };
+    sharedService.broadcastItem = function() {
+        $rootScope.$broadcast('handleBroadcast');
+    };
+    return sharedService;
+});
+
+var classController=function ($scope, sharedService) {
+	$scope.classes = {class:
+	  [{className:'Ship-1',count:'20',no:'1'},
+	   {className:'Ship-2',count:'21',no:'2'},
+	   {className:'Ship-3',count:'23',no:'3'},
+	   {className:'Ship-4',count:'25',no:'4'},
+	   {className:'math-1',count:'19',no:'5'},
+	   {className:'chem-1',count:'17',no:'6'},
+	   {className:'phys-1',count:'18',no:'7'},
+	   {className:'music-1',count:'20',no:'8'},
+	   {className:'sport-1',count:'30',no:'9'},
+	   {className:'song-1',count:'12',no:'10'},
+	   {className:'eng-1',count:'23',no:'11'},
+	   {className:'chine-1',count:'23',no:'12'},
+	   {className:'france-1',count:'24',no:'13'}],
+	   class1:
+	   [{name:'Jone',sex:'M',age:'15'},
+	   {name:'Tom',sex:'M',age:'14'},
+	   {name:'Claa',sex:'W',age:'16'},
+	   {name:'Andrei',sex:'M',age:'17'},
+	   {name:'Kaka',sex:'M',age:'14'}],
+	   class2:
+	   [{name:'Anglo',sex:'M',age:'15'},
+	   {name:'Betro',sex:'M',age:'14'},
+	   {name:'Ronaldo',sex:'W',age:'16'},
+	   {name:'Zidan',sex:'M',age:'17'},
+	   {name:'Pedro',sex:'M',age:'14'}]  
+	  }; 
+    $scope.showClass = function(msg) {
+        sharedService.prepForBroadcast(msg);
+    }
+        
+    // $scope.$on('handleBroadcast', function() {
+    //     $scope.message = sharedService.message;
+    // });        
+}
+
+var studentController=function ($scope, sharedService) {
+	$scope.classes = {class:
+	  [{className:'Ship-1',count:'20',no:'1'},
+	   {className:'Ship-2',count:'21',no:'2'},
+	   {className:'Ship-3',count:'23',no:'3'},
+	   {className:'Ship-4',count:'25',no:'4'},
+	   {className:'math-1',count:'19',no:'5'},
+	   {className:'chem-1',count:'17',no:'6'},
+	   {className:'phys-1',count:'18',no:'7'},
+	   {className:'music-1',count:'20',no:'8'},
+	   {className:'sport-1',count:'30',no:'9'},
+	   {className:'song-1',count:'12',no:'10'},
+	   {className:'eng-1',count:'23',no:'11'},
+	   {className:'chine-1',count:'23',no:'12'},
+	   {className:'france-1',count:'24',no:'13'}],
+	   class1:
+	   [{name:'Jone',sex:'M',age:'15'},
+	   {name:'Tom',sex:'M',age:'14'},
+	   {name:'Claa',sex:'W',age:'16'},
+	   {name:'Andrei',sex:'M',age:'17'},
+	   {name:'Kaka',sex:'M',age:'14'}],
+	   class2:
+	   [{name:'Anglo',sex:'M',age:'15'},
+	   {name:'Betro',sex:'M',age:'14'},
+	   {name:'Ronaldo',sex:'W',age:'16'},
+	   {name:'Zidan',sex:'M',age:'17'},
+	   {name:'Pedro',sex:'M',age:'14'}]  
+	  }; 
+    // $scope.$on('handleBroadcast', function() {
+    //     // $scope.classNo =classes.class2;
+    // })        
+}
+classController.$inject = ['$scope', 'mySharedService'];                
+studentController.$inject = ['$scope', 'mySharedService'];
+</script>
+</html>
